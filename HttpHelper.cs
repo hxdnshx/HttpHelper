@@ -10,6 +10,7 @@ using System.Net;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
@@ -54,6 +55,38 @@ namespace RedXuCSharpClass
 			//解决性能问题?
 			ServicePointManager.DefaultConnectionLimit = ConnectionLimit;
 		}
+
+	    public static string BuildRequest(string uri, string[] additionalParams)
+	    {
+	        var parameters = new NameValueCollection();
+	        if (additionalParams.Length % 2 != 0)
+	            throw new ArgumentException("Invalid additionParams");
+	        int i = 0;
+	        for (i = 0; i < additionalParams.Length / 2; i++)
+	            parameters[additionalParams[i * 2]] = additionalParams[i * 2 + 1];
+	        var uriBuilder = new UriBuilder(uri);
+	        uriBuilder.Query = parameters.ToString();
+	        return uriBuilder.ToString();
+        }
+
+	    public static string BuildRequest(string uri, NameValueCollection additionalParams)
+	    {
+	        var uriBuilder = new UriBuilder(uri);
+	        uriBuilder.Query = additionalParams.ToString();
+	        return uriBuilder.ToString();
+        }
+
+	    public static string BuildRequest(string uri, Dictionary<string, string> additionalParams)
+	    {
+	        var parameters = new NameValueCollection();
+	        foreach (var additionalParam in additionalParams)
+	        {
+	            parameters[additionalParam.Key] = additionalParam.Value;
+	        }
+	        var uriBuilder = new UriBuilder(uri);
+	        uriBuilder.Query = parameters.ToString();
+	        return uriBuilder.ToString();
+        }
 		
 		public void InitCookie()
 		{
