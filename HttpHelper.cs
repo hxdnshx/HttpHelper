@@ -14,6 +14,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace RedXuCSharpClass
 {
@@ -198,13 +199,34 @@ namespace RedXuCSharpClass
 		{
 		    return true;
 		}
-		
-		/// <summary>
-		/// 发送GET请求
-		/// </summary>
-		/// <param name="url"></param>
-		/// <returns></returns>
-		public String HttpGet(String url)
+
+        /// <summary>
+        /// 异步GET请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+	    public Task<string> HttpGetAsync(string url)
+	    {
+	        return Task.Run(() => HttpGet(url));
+	    }
+
+	    /// <summary>
+	    /// 异步GET请求
+	    /// </summary>
+	    /// <param name="url"></param>
+	    /// <param name="refer"></param>
+	    /// <returns></returns>
+	    public Task<string> HttpGetAsync(string url, string refer)
+	    {
+	        return Task.Run(() => HttpGet(url,refer));
+	    }
+
+        /// <summary>
+        /// 发送GET请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public String HttpGet(String url)
 		{
 			return HttpGet(url,url);
 		}
@@ -355,6 +377,29 @@ namespace RedXuCSharpClass
 				return null;
 			}						
 		}
+
+        /// <summary>
+        /// 异步POST请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+	    public Task<string> HttpPostAsync(string url, string data)
+	    {
+	        return Task.Run(() => HttpPost(url, data));
+	    }
+
+        /// <summary>
+        /// 异步POST请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="data"></param>
+        /// <param name="refer"></param>
+        /// <returns></returns>
+        public Task<string> HttpPostAsync(string url, string data, string refer)
+	    {
+	        return Task.Run(() => HttpPost(url, data, refer));
+        }
 		
 		/// <summary>
 		/// 发送POST请求
