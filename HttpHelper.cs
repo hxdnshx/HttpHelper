@@ -181,7 +181,7 @@ namespace RedXuCSharpClass
 			}
 			catch(Exception e)
 			{
-				Trace.WriteLine("GetStringFromResponse Error: " + e.Message);
+				Console.WriteLine("GetStringFromResponse Error: " + e.Message);
 			}
 			
 			return html;
@@ -294,7 +294,7 @@ namespace RedXuCSharpClass
 			}
 			catch(Exception e)
 			{
-				Trace.WriteLine("HttpGet Error: " + e.Message);
+				Console.WriteLine("HttpGet Error: " + e.Message);
 				return String.Empty;
 			}			
 		}
@@ -373,7 +373,7 @@ namespace RedXuCSharpClass
 			}
 			catch(Exception e)
 			{
-				Trace.WriteLine("HttpGetMine Error: " + e.Message);
+				Console.WriteLine("HttpGetMine Error: " + e.Message);
 				return null;
 			}						
 		}
@@ -475,7 +475,7 @@ namespace RedXuCSharpClass
 			}
 			catch(Exception e)
 			{
-				Trace.WriteLine("HttpPost Error: " + e.Message);
+				Console.WriteLine("HttpPost Error: " + e.Message);
 				return String.Empty;
 			}
 		}
@@ -527,14 +527,14 @@ namespace RedXuCSharpClass
 		
 		public void DebugCookies()
 		{
-			Trace.WriteLine("**********************BEGIN COOKIES*************************");
+			Console.WriteLine("**********************BEGIN COOKIES*************************");
 			foreach(Cookie c in _cookiecollection)
 			{
-				Trace.WriteLine(c.Name + "=" + c.Value);
-				Trace.WriteLine("Path=" + c.Path);
-				Trace.WriteLine("Domain=" + c.Domain);
+				Console.WriteLine(c.Name + "=" + c.Value);
+				Console.WriteLine("Path=" + c.Path);
+				Console.WriteLine("Domain=" + c.Domain);
 			}
-			Trace.WriteLine("**********************END COOKIES*************************");
+			Console.WriteLine("**********************END COOKIES*************************");
 		}
 	
 	}
